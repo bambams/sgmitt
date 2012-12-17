@@ -28,6 +28,8 @@ void initializeAllegro5(
 
 int main(int argc, char * argv[]) try
 {
+    const char * const TITLE = "Santa's Gotta Make It To Town";
+
     std::string root = getRootDir(argv[0]);
 
     const int player_start_x = 300;
@@ -38,6 +40,8 @@ int main(int argc, char * argv[]) try
     al5poly::ALLEGRO_EVENT_QUEUE_Ptr eventQueue;
 
     initializeAllegro5(display, timer, eventQueue);
+
+    al_set_window_title(display.get(), TITLE);
 
     al_set_target_bitmap(al_get_backbuffer(display.get()));
 
