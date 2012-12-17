@@ -1,7 +1,11 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
+#include <boost/algorithm/string/regex.hpp>
+#include <boost/algorithm/string/replace.hpp>
+#include <boost/regex.hpp>
 #include <iostream>
 #include <map>
+#include <string>
 
 #include "al5poly/altypedef.hpp"
 #include "al5poly/Animation.hpp"
@@ -13,7 +17,9 @@
 #include "al5poly/Player.hpp"
 #include "al5poly/Renderer.hpp"
 
-al5poly::Player createPlayer(void);
+al5poly::Player createPlayer(const std::string &);
+
+std::string getRootDir(const std::string &);
 
 void initializeAllegro5(
         al5poly::ALLEGRO_DISPLAY_Ptr &,
@@ -39,7 +45,7 @@ int main(int argc, char * argv[]) try
 
     al5poly::Camera camera;
     al5poly::Clock clock;
-    al5poly::Player player(createPlayer());
+    al5poly::Player player(createPlayer(root));
     al5poly::Renderer renderer(display);
 
     player.setCurrentAnimation("default");
@@ -93,10 +99,11 @@ catch(std::exception & ex)
     return 1;
 }
 
-al5poly::Player createPlayer()
+al5poly::Player createPlayer(const std::string & root)
 {
+    std::string path = root + "assets/reindeer.png";
     al5poly::ALLEGRO_BITMAP_Ptr reindeer(
-            al_load_bitmap("assets/reindeer.png"),
+            al_load_bitmap(path.c_str()),
             al_destroy_bitmap);
 
     if(reindeer.get() == 0)
@@ -121,6 +128,16 @@ al5poly::Player createPlayer()
     al5poly::Player player(animations);
 
     return player;
+}
+
+std::string getRootDir(const std::string & command)
+{
+    std::string root(command);
+
+    boost::algorithm::replace_all(root, "\\", "/");
+    boost::algorithm::replace_all(root, "bin/game.exe", "");
+
+    return root;
 }
 
 void initializeAllegro5(
