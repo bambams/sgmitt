@@ -108,7 +108,9 @@ al5poly::Player createPlayer(const std::string & root)
 
     if(reindeer.get() == 0)
     {
-        al5poly::Exception("Failed to load reindeer sprite!").raise();
+        std::string msg = std::string(
+                "Failed to load reindeer sprite! (" + path + ")");
+        al5poly::Exception(msg).raise();
     }
 
     al_convert_mask_to_alpha(
