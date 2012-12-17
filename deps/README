@@ -1,0 +1,17 @@
+You will need libal5poly here. It can be retrieved from my GitHub
+repository:
+
+  git clone git://github.com/bamccaig/libal5poly.git
+
+${root}/deps/libal5poly/include should refer to the libal5poly include
+directory and ${root}/deps/libal5poly/bin/libal5poly.1.dll should refer to
+the Windows DLL. You can build that with the Makefile.mingw file (which is
+a hack, but seems to work for now).
+
+You will also need Boost's headers (download a distribution and copy the
+'boost' subdirectory full of headers into some include directory e.g.,
+your toolchain or even this project).
+
+You will need Allegro 5. Download the Allegro 5 binaries and install it
+into your compiler toolchain or somewhere else that your environment will
+find it e.g., inside your MinGW tree.
