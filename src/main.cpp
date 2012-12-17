@@ -13,6 +13,8 @@
 #include "al5poly/Player.hpp"
 #include "al5poly/Renderer.hpp"
 
+al5poly::Player createPlayer(void);
+
 void initializeAllegro5(
         al5poly::ALLEGRO_DISPLAY_Ptr &,
         al5poly::ALLEGRO_TIMER_Ptr &,
@@ -20,10 +22,10 @@ void initializeAllegro5(
 
 al5poly::IAnimation::StringMap loadAnimations(const int, const int);
 
-al5poly::Player createPlayer(void);
-
 int main(int argc, char * argv[]) try
 {
+    std::string root = getRootDir(argv[0]);
+
     const int player_start_x = 300;
     const int player_start_y = 400;
 
