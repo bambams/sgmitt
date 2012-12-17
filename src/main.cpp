@@ -134,16 +134,18 @@ al5poly::Player createPlayer(const std::string & root)
 
 std::string getRootDir(const std::string & command)
 {
+    const char * const EXE = "game.exe";
+
     std::string root(command);
 
-    if(root == "game.exe")
+    if(root == EXE)
     {
         root = "../";
     }
     else
     {
         boost::algorithm::replace_all(root, "\\", "/");
-        boost::algorithm::replace_all(root, "game.exe", "");
+        boost::algorithm::replace_all(root, EXE, "");
         boost::algorithm::replace_all(root, "bin/", "");
     }
 
