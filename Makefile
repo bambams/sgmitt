@@ -29,10 +29,13 @@ run: game
 ${BINDIR}:
 	${MKDIR} $@
 
+${BINDIR}/libal5poly.1.dll:
+	ln -s ../deps/libal5poly/bin/libal5poly.1.dll $@
+
 ${OBJDIR}:
 	${MKDIR} $@
 
-${GAME}: ${OBJDIR}/main.o ${BINDIR}
+${GAME}: ${OBJDIR}/main.o ${BINDIR} ${BINDIR}/libal5poly.1.dll
 	${CXX} -o $@ $< ${LIBS}
 
 ${OBJDIR}/main.o: ${SRCDIR}/main.cpp ${OBJDIR}
