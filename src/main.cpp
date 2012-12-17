@@ -136,8 +136,16 @@ std::string getRootDir(const std::string & command)
 {
     std::string root(command);
 
-    boost::algorithm::replace_all(root, "\\", "/");
-    boost::algorithm::replace_all(root, "bin/game.exe", "");
+    if(root == "game.exe")
+    {
+        root = "../";
+    }
+    else
+    {
+        boost::algorithm::replace_all(root, "\\", "/");
+        boost::algorithm::replace_all(root, "game.exe", "");
+        boost::algorithm::replace_all(root, "bin/", "");
+    }
 
     return root;
 }
