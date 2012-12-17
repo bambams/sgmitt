@@ -96,7 +96,7 @@ catch(std::exception & ex)
 al5poly::Player createPlayer()
 {
     al5poly::ALLEGRO_BITMAP_Ptr reindeer(
-            al_load_bitmap("assets/reindeer.bmp"),
+            al_load_bitmap("assets/reindeer.png"),
             al_destroy_bitmap);
 
     if(reindeer.get() == 0)
