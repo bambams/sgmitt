@@ -20,8 +20,6 @@ void initializeAllegro5(
         al5poly::ALLEGRO_TIMER_Ptr &,
         al5poly::ALLEGRO_EVENT_QUEUE_Ptr &);
 
-al5poly::IAnimation::StringMap loadAnimations(const int, const int);
-
 int main(int argc, char * argv[]) try
 {
     std::string root = getRootDir(argv[0]);
