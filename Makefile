@@ -33,7 +33,7 @@ ${DEPSDIR}/libal5poly:
 	git clone git://github.com/bamccaig/libal5poly.git deps/libal5poly
 
 ${DEPSDIR}/libal5poly/bin/libal5poly.1.dll: ${DEPSDIR}/libal5poly
-	cd $< && ${MAKE} -f Makefile.mingw
+	cd $< && ${MAKE} -f Makefile.mingw32
 
 ${BINDIR}:
 	${MKDIR} $@
