@@ -32,8 +32,8 @@ int main(int argc, char * argv[]) try
 
     std::string root = getRootDir(argv[0]);
 
-    const int player_start_x = 300;
-    const int player_start_y = 400;
+    const int PLAYER_START_X = 300;
+    const int PLAYER_START_Y = 400;
 
     al5poly::ALLEGRO_DISPLAY_Ptr display;
     al5poly::ALLEGRO_TIMER_Ptr timer;
@@ -54,8 +54,8 @@ int main(int argc, char * argv[]) try
 
     player.setCurrentAnimation("default");
     player.beginAnimation(1, *clock.getGameTime());
-    player.setX(player_start_x);
-    player.setY(player_start_y);
+    player.setX(PLAYER_START_X);
+    player.setY(PLAYER_START_Y);
 
     al_start_timer(timer.get());
 
