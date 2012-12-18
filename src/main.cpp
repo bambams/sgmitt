@@ -28,12 +28,11 @@ void initializeAllegro5(
 
 int main(int argc, char * argv[]) try
 {
+    const int PLAYER_START_X = 300;
+    const int PLAYER_START_Y = 400;
     const char * const TITLE = "Santa's Gotta Make It To Town";
 
     std::string root = getRootDir(argv[0]);
-
-    const int PLAYER_START_X = 300;
-    const int PLAYER_START_Y = 400;
 
     al5poly::ALLEGRO_DISPLAY_Ptr display;
     al5poly::ALLEGRO_TIMER_Ptr timer;
