@@ -22,6 +22,7 @@ OBJECTS = ${OBJDIR}/IInputHandler.o \
 all: game
 
 clean:
+	cd ${DEPSDIR}/libal5poly && ${MAKE} -f Makefile.mingw32 clean
 	${REMOVE} ${BINDIR} ${OBJDIR}
 
 dirs: ${BINDIR} ${OBJDIR}
