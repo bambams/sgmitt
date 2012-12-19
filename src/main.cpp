@@ -21,9 +21,17 @@
 #include "JumpHandler.hpp"
 #include "make_ptr.hpp"
 
+const int H4X_GRAVITY_STEP = 10;
+const int H4X_JUMP_STEP = 40;
+const int PLAYER_START_X = 300;
+const int PLAYER_START_Y = 400;
+
 al5poly::Player createPlayer(const std::string &);
 
 std::string getRootDir(const std::string &);
+
+void h4xGravity(al5poly::Player &);
+void h4xJump(const al5poly::IGameTime &, al5poly::Player &);
 
 void initializeAllegro5(
         al5poly::ALLEGRO_DISPLAY_Ptr &,
@@ -32,8 +40,6 @@ void initializeAllegro5(
 
 int main(int argc, char * argv[]) try
 {
-    const int PLAYER_START_X = 300;
-    const int PLAYER_START_Y = 400;
     const char * const TITLE = "Santa's Gotta Make It To Town";
 
     std::string root = getRootDir(argv[0]);
@@ -79,6 +85,15 @@ int main(int argc, char * argv[]) try
         {
             clock.tick();
             redraw = true;
+
+            // h4x.
+            if(player.isJumping())
+            {
+                h4xJump(*clock.getGameTime(), player);
+            }
+
+            // h4x.
+            h4xGravity(player);
         }
         else if(event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
@@ -168,6 +183,43 @@ std::string getRootDir(const std::string & command)
     }
 
     return root;
+}
+
+void h4xGravity(al5poly::Player & player)
+{
+    int y = player.getY();
+
+    if(y < PLAYER_START_Y)
+    {
+        y += H4X_GRAVITY_STEP;
+    }
+
+    if(y > PLAYER_START_Y)
+    {
+        y = PLAYER_START_Y;
+    }
+
+    player.setY(y);
+}
+
+void h4xJump(
+        const al5poly::IGameTime & time,
+        al5poly::Player & player) try
+{
+    int delta;
+
+    player.updateJump(time, &delta);
+
+    int dy = H4X_JUMP_STEP * delta;
+    int y = player.getY();
+
+    y -= dy;
+
+    player.setY(y);
+}
+catch(std::exception & ex)
+{
+    std::cerr << "Failed jump: " << ex.what() << std::endl;
 }
 
 void initializeAllegro5(
