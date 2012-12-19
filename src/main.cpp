@@ -18,6 +18,8 @@
 #include "al5poly/Renderer.hpp"
 
 #include "InputManager.hpp"
+#include "JumpHandler.hpp"
+#include "make_ptr.hpp"
 
 al5poly::Player createPlayer(const std::string &);
 
@@ -61,6 +63,9 @@ int main(int argc, char * argv[]) try
     al_start_timer(timer.get());
 
     InputManager inputMan;
+
+    inputMan.addActionHandler("jump",
+            make_ptr<JumpHandler>(new JumpHandler(player)));
 
     inputMan.setKeyAction(ALLEGRO_KEY_SPACE, "jump");
 
