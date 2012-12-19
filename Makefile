@@ -12,6 +12,8 @@ REMOVE = rm -fR
 SRCDIR = src
 
 GAME = ${BINDIR}/game.exe
+OBJECTS = ${OBJDIR}/IInputHandler.o \
+		  ${OBJDIR}/main.o
 
 .PHONY: all clean game libal5poly run
 
@@ -44,8 +46,11 @@ ${BINDIR}/libal5poly.1.dll:
 ${OBJDIR}:
 	${MKDIR} $@
 
-${GAME}: ${OBJDIR}/main.o ${BINDIR} ${BINDIR}/libal5poly.1.dll
-	${CXX} -o $@ $< ${LIBS}
+${GAME}: ${OBJECTS} ${BINDIR} ${BINDIR}/libal5poly.1.dll
+	${CXX} -o $@ ${OBJECTS} ${LIBS}
+
+${OBJDIR}/IInputHandler.o: ${SRCDIR}/IInputHandler.cpp ${INCDIR}/IInputHandler.hpp ${OBJDIR}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/main.o: ${SRCDIR}/main.cpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
