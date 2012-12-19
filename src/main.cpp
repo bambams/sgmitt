@@ -74,6 +74,9 @@ int main(int argc, char * argv[]) try
             make_ptr<JumpHandler>(new JumpHandler(player)));
 
     inputMan.setKeyAction(ALLEGRO_KEY_SPACE, "jump");
+    inputMan.setKeyAction(ALLEGRO_KEY_UP, "jump");
+    inputMan.setKeyAction(ALLEGRO_KEY_LEFT, "run-left");
+    inputMan.setKeyAction(ALLEGRO_KEY_RIGHT, "run-right");
 
     while(true)
     {
