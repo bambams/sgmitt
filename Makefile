@@ -13,6 +13,7 @@ SRCDIR = src
 
 GAME = ${BINDIR}/game.exe
 OBJECTS = ${OBJDIR}/IInputHandler.o \
+		  ${OBJDIR}/InputManager.o \
 		  ${OBJDIR}/main.o
 
 .PHONY: all clean game libal5poly run
@@ -50,6 +51,9 @@ ${GAME}: ${OBJECTS} ${BINDIR} ${BINDIR}/libal5poly.1.dll
 	${CXX} -o $@ ${OBJECTS} ${LIBS}
 
 ${OBJDIR}/IInputHandler.o: ${SRCDIR}/IInputHandler.cpp ${INCDIR}/IInputHandler.hpp ${OBJDIR}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+${OBJDIR}/InputManager.o: ${SRCDIR}/InputManager.cpp ${INCDIR}/InputManager.hpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/main.o: ${SRCDIR}/main.cpp ${OBJDIR}
