@@ -17,6 +17,8 @@
 #include "al5poly/Player.hpp"
 #include "al5poly/Renderer.hpp"
 
+#include "InputManager.hpp"
+
 al5poly::Player createPlayer(const std::string &);
 
 std::string getRootDir(const std::string &);
@@ -58,6 +60,10 @@ int main(int argc, char * argv[]) try
 
     al_start_timer(timer.get());
 
+    InputManager inputMan;
+
+    inputMan.setKeyAction(ALLEGRO_KEY_SPACE, "jump");
+
     while(true)
     {
         ALLEGRO_EVENT event;
@@ -69,10 +75,14 @@ int main(int argc, char * argv[]) try
             clock.tick();
             redraw = true;
         }
-        else if(event.type == ALLEGRO_EVENT_KEY_DOWN &&
-                event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+        else if(event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
-            break;
+            if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            {
+                break;
+            }
+
+            inputMan.keyPress(*clock.getGameTime(), &event);
         }
         else if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         {
