@@ -26,7 +26,7 @@ build-deps: ${DEPSDIR}/libal5poly
 	cd $< && ${MAKE} -f Makefile.mingw32
 
 clean:
-	cd ${DEPSDIR}/libal5poly && ${MAKE} -f Makefile.mingw32 clean
+	-cd ${DEPSDIR}/libal5poly && ${MAKE} -f Makefile.mingw32 clean
 	${REMOVE} ${BINDIR} ${OBJDIR}
 
 dirs: ${BINDIR} ${OBJDIR}
