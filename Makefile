@@ -12,7 +12,9 @@ REMOVE = rm -fR
 SRCDIR = src
 
 GAME = ${BINDIR}/game.exe
-OBJECTS = ${OBJDIR}/IInputHandler.o \
+OBJECTS = ${OBJDIR}/AssetManager.o \
+		  ${OBJDIR}/AssetManagerException.o \
+		  ${OBJDIR}/IInputHandler.o \
 		  ${OBJDIR}/InputManager.o \
 		  ${OBJDIR}/JumpHandler.o \
 		  ${OBJDIR}/main.o
@@ -55,6 +57,12 @@ ${OBJDIR}:
 
 ${GAME}: ${OBJECTS} ${BINDIR} ${BINDIR}/libal5poly.1.dll
 	${CXX} -o $@ ${OBJECTS} ${LIBS}
+
+${OBJDIR}/AssetManager.o: ${SRCDIR}/AssetManager.cpp ${INCDIR}/AssetManager.hpp ${OBJDIR}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+${OBJDIR}/AssetManagerException.o: ${SRCDIR}/AssetManagerException.cpp ${INCDIR}/AssetManagerException.hpp ${OBJDIR}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/IInputHandler.o: ${SRCDIR}/IInputHandler.cpp ${INCDIR}/IInputHandler.hpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
