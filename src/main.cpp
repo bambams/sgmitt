@@ -96,12 +96,18 @@ int main(int argc, char * argv[]) try
         }
         else if(event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
-            if(event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            int keycode = event.keyboard.keycode;
+
+            if(keycode == ALLEGRO_KEY_ESCAPE)
             {
                 break;
             }
 
-            inputMan.keyPress(*clock.getGameTime(), &event);
+            inputMan.keyPress(keycode);
+        }
+        else if(event.type == ALLEGRO_EVENT_KEY_UP)
+        {
+            inputMan.keyRelease(event.keyboard.keycode);
         }
         else if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         {
@@ -111,6 +117,8 @@ int main(int argc, char * argv[]) try
         // Logic.
         if(tick)
         {
+            inputMan.sendEvents(*clock.getGameTime());
+
             if(player.isJumping())
             {
                 h4xJump(*clock.getGameTime(), player);
