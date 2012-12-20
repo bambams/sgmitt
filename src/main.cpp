@@ -20,6 +20,7 @@
 #include "al5poly/Renderer.hpp"
 
 #include "JumpHandler.hpp"
+#include "RunHandler.hpp"
 #include "make_ptr.hpp"
 
 const char * const PLAYER_BITMAP_NAME = "reindeer";
@@ -66,6 +67,11 @@ int main(int argc, char * argv[]) try
 
     inputMan.addActionHandler("jump",
             make_ptr<JumpHandler>(new JumpHandler(player)));
+
+    RunHandler::Ptr runner(new RunHandler(player));
+
+    inputMan.addActionHandler("run-left", runner);
+    inputMan.addActionHandler("run-right", runner);
 
     inputMan.setKeyAction(ALLEGRO_KEY_SPACE, "jump");
     inputMan.setKeyAction(ALLEGRO_KEY_UP, "jump");
