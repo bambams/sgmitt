@@ -15,7 +15,7 @@ GAME = ${BINDIR}/game.exe
 OBJECTS = ${OBJDIR}/JumpHandler.o \
 		  ${OBJDIR}/main.o
 
-.PHONY: all build-deps clean game libal5poly run
+.PHONY: all build-deps clean deepclean game libal5poly run
 
 all: game
 
@@ -24,8 +24,11 @@ build-deps: ${DEPSDIR}/libal5poly
 	cd $< && ${MAKE} -f Makefile.mingw32
 
 clean:
-	-cd ${DEPSDIR}/libal5poly && ${MAKE} -f Makefile.mingw32 clean
 	${REMOVE} ${BINDIR} ${OBJDIR}
+
+deepclean:
+	-cd ${DEPSDIR}/libal5poly && ${MAKE} -f Makefile.mingw32 clean
+	${MAKE} clean
 
 dirs: ${BINDIR} ${OBJDIR}
 
