@@ -12,7 +12,9 @@ class JumpHandler:
 public:
     JumpHandler(al5poly::Player &);
 
-    void operator()(const al5poly::IGameTime &) const;
+    void operator()(
+            const std::string &,
+            const al5poly::IGameTime &) const;
 };
 
 #endif

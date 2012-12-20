@@ -5,7 +5,9 @@ JumpHandler::JumpHandler(al5poly::Player & player):
 {
 }
 
-void JumpHandler::operator()(const al5poly::IGameTime & time) const
+void JumpHandler::operator()(
+        const std::string &,
+        const al5poly::IGameTime & time) const
 {
     this->player_.jump(time);
 }
