@@ -17,18 +17,21 @@
 #include "al5poly/Player.hpp"
 #include "al5poly/Renderer.hpp"
 
+#include "AssetManager.hpp"
 #include "InputManager.hpp"
 #include "JumpHandler.hpp"
 #include "make_ptr.hpp"
+
+const char * const PLAYER_BITMAP_NAME = "reindeer";
+const char * const PLAYER_SPRITE_PATH = "reindeer.png";
+const char * const PLAYER_ANIMATION_NAME = "default";
 
 const int H4X_GRAVITY_STEP = 10;
 const int H4X_JUMP_STEP = 40;
 const int PLAYER_START_X = 300;
 const int PLAYER_START_Y = 400;
 
-al5poly::Player createPlayer(const std::string &);
-
-std::string getRootDir(const std::string &);
+al5poly::Player createPlayer(const AssetManager &);
 
 void h4xGravity(al5poly::Player &);
 void h4xJump(const al5poly::IGameTime &, al5poly::Player &);
@@ -42,8 +45,6 @@ int main(int argc, char * argv[]) try
 {
     const char * const TITLE = "Santa's Gotta Make It To Town";
 
-    std::string root = getRootDir(argv[0]);
-
     al5poly::ALLEGRO_DISPLAY_Ptr display;
     al5poly::ALLEGRO_TIMER_Ptr timer;
     al5poly::ALLEGRO_EVENT_QUEUE_Ptr eventQueue;
@@ -52,23 +53,17 @@ int main(int argc, char * argv[]) try
 
     al_set_window_title(display.get(), TITLE);
 
-    al_set_target_bitmap(al_get_backbuffer(display.get()));
-
-    al_clear_to_color(al_map_rgb(0, 0, 0));
-
     al5poly::Camera camera;
     al5poly::Clock clock;
-    al5poly::Player player(createPlayer(root));
     al5poly::Renderer renderer(display);
 
-    player.setCurrentAnimation("default");
-    player.beginAnimation(1, *clock.getGameTime());
-    player.setX(PLAYER_START_X);
-    player.setY(PLAYER_START_Y);
-
-    al_start_timer(timer.get());
-
+    AssetManager assMan;
     InputManager inputMan;
+
+    assMan.loadBitmap(PLAYER_BITMAP_NAME, PLAYER_SPRITE_PATH, true);
+    assMan.loadAnimation(PLAYER_ANIMATION_NAME, 1, PLAYER_BITMAP_NAME);
+
+    al5poly::Player player(createPlayer(assMan));
 
     inputMan.addActionHandler("jump",
             make_ptr<JumpHandler>(new JumpHandler(player)));
@@ -77,6 +72,16 @@ int main(int argc, char * argv[]) try
     inputMan.setKeyAction(ALLEGRO_KEY_UP, "jump");
     inputMan.setKeyAction(ALLEGRO_KEY_LEFT, "run-left");
     inputMan.setKeyAction(ALLEGRO_KEY_RIGHT, "run-right");
+
+    player.setCurrentAnimation(PLAYER_ANIMATION_NAME);
+    player.beginAnimation(1, *clock.getGameTime());
+    player.setX(PLAYER_START_X);
+    player.setY(PLAYER_START_Y);
+
+    al_start_timer(timer.get());
+
+    al_set_target_bitmap(al_get_backbuffer(display.get()));
+    al_clear_to_color(al_map_rgb(0, 0, 0));
 
     while(true)
     {
@@ -135,57 +140,16 @@ catch(std::exception & ex)
     return 1;
 }
 
-al5poly::Player createPlayer(const std::string & root)
+al5poly::Player createPlayer(const AssetManager & assMan)
 {
-    std::string path = root + "assets/reindeer.png";
-    al5poly::ALLEGRO_BITMAP_Ptr reindeer(
-            al_load_bitmap(path.c_str()),
-            al_destroy_bitmap);
-
-    if(reindeer.get() == 0)
-    {
-        std::string msg = std::string(
-                "Failed to load reindeer sprite! (" + path + ")");
-        al5poly::Exception(msg).raise();
-    }
-
-    al_convert_mask_to_alpha(
-            reindeer.get(),
-            al_map_rgb(255, 0, 255));
-
-    al5poly::ALLEGRO_BITMAP_Ptr_Vector sprites;
-
-    sprites.push_back(reindeer);
-
-    al5poly::IAnimation::Ptr animation(new al5poly::Animation(sprites));
-
     al5poly::IAnimation::StringMap animations;
 
-    animations.insert(std::make_pair("default", animation));
+    animations.insert(std::make_pair(PLAYER_ANIMATION_NAME,
+            assMan.getAnimation(PLAYER_ANIMATION_NAME)));
 
     al5poly::Player player(animations);
 
     return player;
-}
-
-std::string getRootDir(const std::string & command)
-{
-    const char * const EXE = "game.exe";
-
-    std::string root(command);
-
-    if(root == EXE)
-    {
-        root = "../";
-    }
-    else
-    {
-        boost::algorithm::replace_all(root, "\\", "/");
-        boost::algorithm::replace_all(root, EXE, "");
-        boost::algorithm::replace_all(root, "bin/", "");
-    }
-
-    return root;
 }
 
 void h4xGravity(al5poly::Player & player)
