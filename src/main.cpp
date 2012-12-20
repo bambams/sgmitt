@@ -85,22 +85,14 @@ int main(int argc, char * argv[]) try
     while(true)
     {
         ALLEGRO_EVENT event;
-        bool redraw = false;
+        bool tick = false;
+
         al_wait_for_event(eventQueue.get(), &event);
 
         if(event.type == ALLEGRO_EVENT_TIMER)
         {
             clock.tick();
-            redraw = true;
-
-            // h4x.
-            if(player.isJumping())
-            {
-                h4xJump(*clock.getGameTime(), player);
-            }
-
-            // h4x.
-            h4xGravity(player);
+            tick = true;
         }
         else if(event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
@@ -116,7 +108,20 @@ int main(int argc, char * argv[]) try
             break;
         }
 
-        if(redraw)
+        // Logic.
+        if(tick)
+        {
+            if(player.isJumping())
+            {
+                h4xJump(*clock.getGameTime(), player);
+            }
+
+            // h4x.
+            h4xGravity(player);
+        }
+
+        // Drawing.
+        if(tick)
         {
             try
             {
