@@ -17,9 +17,13 @@ OBJECTS = ${OBJDIR}/IInputHandler.o \
 		  ${OBJDIR}/JumpHandler.o \
 		  ${OBJDIR}/main.o
 
-.PHONY: all clean game libal5poly run
+.PHONY: all build-deps clean game libal5poly run
 
 all: game
+
+build-deps: ${DEPSDIR}/libal5poly
+	${REMOVE} ${DEPSDIR}/libal5poly/bin/libal5poly.1.dll
+	cd $< && ${MAKE} -f Makefile.mingw32
 
 clean:
 	cd ${DEPSDIR}/libal5poly && ${MAKE} -f Makefile.mingw32 clean
