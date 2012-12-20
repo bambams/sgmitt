@@ -9,6 +9,7 @@
 
 #include "al5poly/altypedef.hpp"
 #include "al5poly/Animation.hpp"
+#include "al5poly/AssetManager.hpp"
 #include "al5poly/Camera.hpp"
 #include "al5poly/Clock.hpp"
 #include "al5poly/IAnimation.hpp"
@@ -17,7 +18,6 @@
 #include "al5poly/Player.hpp"
 #include "al5poly/Renderer.hpp"
 
-#include "AssetManager.hpp"
 #include "InputManager.hpp"
 #include "JumpHandler.hpp"
 #include "make_ptr.hpp"
@@ -31,7 +31,7 @@ const int H4X_JUMP_STEP = 40;
 const int PLAYER_START_X = 300;
 const int PLAYER_START_Y = 400;
 
-al5poly::Player createPlayer(const AssetManager &);
+al5poly::Player createPlayer(const al5poly::AssetManager &);
 
 void h4xGravity(al5poly::Player &);
 void h4xJump(const al5poly::IGameTime &, al5poly::Player &);
@@ -53,11 +53,11 @@ int main(int argc, char * argv[]) try
 
     al_set_window_title(display.get(), TITLE);
 
+    al5poly::AssetManager assMan;
     al5poly::Camera camera;
     al5poly::Clock clock;
     al5poly::Renderer renderer(display);
 
-    AssetManager assMan;
     InputManager inputMan;
 
     assMan.loadBitmap(PLAYER_BITMAP_NAME, PLAYER_SPRITE_PATH, true);
@@ -140,7 +140,7 @@ catch(std::exception & ex)
     return 1;
 }
 
-al5poly::Player createPlayer(const AssetManager & assMan)
+al5poly::Player createPlayer(const al5poly::AssetManager & assMan)
 {
     al5poly::IAnimation::StringMap animations;
 
