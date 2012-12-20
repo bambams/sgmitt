@@ -12,9 +12,7 @@ REMOVE = rm -fR
 SRCDIR = src
 
 GAME = ${BINDIR}/game.exe
-OBJECTS = ${OBJDIR}/IInputHandler.o \
-		  ${OBJDIR}/InputManager.o \
-		  ${OBJDIR}/JumpHandler.o \
+OBJECTS = ${OBJDIR}/JumpHandler.o \
 		  ${OBJDIR}/main.o
 
 .PHONY: all build-deps clean game libal5poly run
@@ -56,12 +54,6 @@ ${OBJDIR}:
 
 ${GAME}: ${OBJECTS} ${BINDIR} ${BINDIR}/libal5poly.1.dll
 	${CXX} -o $@ ${OBJECTS} ${LIBS}
-
-${OBJDIR}/IInputHandler.o: ${SRCDIR}/IInputHandler.cpp ${INCDIR}/IInputHandler.hpp ${OBJDIR}
-	${CXX} ${CXXFLAGS} -c -o $@ $<
-
-${OBJDIR}/InputManager.o: ${SRCDIR}/InputManager.cpp ${INCDIR}/InputManager.hpp ${OBJDIR}
-	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/JumpHandler.o: ${SRCDIR}/JumpHandler.cpp ${INCDIR}/JumpHandler.hpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<

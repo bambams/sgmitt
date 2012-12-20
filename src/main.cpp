@@ -15,10 +15,10 @@
 #include "al5poly/IAnimation.hpp"
 #include "al5poly/IException.hpp"
 #include "al5poly/IGameTime.hpp"
+#include "al5poly/InputManager.hpp"
 #include "al5poly/Player.hpp"
 #include "al5poly/Renderer.hpp"
 
-#include "InputManager.hpp"
 #include "JumpHandler.hpp"
 #include "make_ptr.hpp"
 
@@ -56,9 +56,8 @@ int main(int argc, char * argv[]) try
     al5poly::AssetManager assMan;
     al5poly::Camera camera;
     al5poly::Clock clock;
+    al5poly::InputManager inputMan;
     al5poly::Renderer renderer(display);
-
-    InputManager inputMan;
 
     assMan.loadBitmap(PLAYER_BITMAP_NAME, PLAYER_SPRITE_PATH, true);
     assMan.loadAnimation(PLAYER_ANIMATION_NAME, 1, PLAYER_BITMAP_NAME);

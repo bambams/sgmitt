@@ -2,14 +2,11 @@
     #define JUMP_HANDLER_HPP
 
     #include <al5poly/IGameTime.hpp>
+    #include <al5poly/IInputHandler.hpp>
     #include <al5poly/Player.hpp>
 
-class JumpHandler;
-
-    #include "IInputHandler.hpp"
-
 class JumpHandler:
-    public IInputHandler
+    public al5poly::IInputHandler
 {
     al5poly::Player & player_;
 public:
