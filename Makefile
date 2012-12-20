@@ -13,6 +13,7 @@ SRCDIR = src
 
 GAME = ${BINDIR}/game.exe
 OBJECTS = ${OBJDIR}/JumpHandler.o \
+		  ${OBJDIR}/RunHandler.o \
 		  ${OBJDIR}/main.o
 
 .PHONY: all build-deps clean deepclean game libal5poly run
@@ -59,6 +60,9 @@ ${GAME}: ${OBJECTS} ${BINDIR} ${BINDIR}/libal5poly.1.dll
 	${CXX} -o $@ ${OBJECTS} ${LIBS}
 
 ${OBJDIR}/JumpHandler.o: ${SRCDIR}/JumpHandler.cpp ${INCDIR}/JumpHandler.hpp ${OBJDIR}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+${OBJDIR}/RunHandler.o: ${SRCDIR}/RunHandler.cpp ${INCDIR}/RunHandler.hpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/main.o: ${SRCDIR}/main.cpp ${OBJDIR}
