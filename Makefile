@@ -1,10 +1,10 @@
 BINDIR = bin
 COPY = cp
-CXX = mingw32-g++
-CXXFLAGS = -g3 -Iinclude -Ideps/libal5poly/include -Wall
+CXX = g++
+CXXFLAGS = -g3 -Iinclude -Ideps/libal5poly/include -Wall `pkg-config --cflags allegro-5.0 allegro_image-5.0 allegro_primitives-5.0`
 DEPSDIR = deps
 INCDIR = include
-LIBS = -Ldeps/libal5poly/bin/ -llibal5poly -lallegro-5.0.7-monolith-md
+LIBS = -Ldeps/libal5poly/lib/ -lal5poly `pkg-config --libs allegro-5.0 allegro_image-5.0 allegro_primitives-5.0`
 MKDIR = mkdir -p
 OBJDIR = obj
 PREFIX =
@@ -22,24 +22,24 @@ OBJECTS = ${OBJDIR}/H4xDummy.o \
 all: game
 
 build-deps: ${DEPSDIR}/libal5poly
-	cd $< && ${MAKE} -f Makefile.mingw32 clean
-	cd $< && ${MAKE} -f Makefile.mingw32
+	cd $< && ${MAKE} clean
+	cd $< && ${MAKE}
 
 clean:
 	${REMOVE} ${BINDIR} ${OBJDIR}
 
 deepclean:
-	-cd ${DEPSDIR}/libal5poly && ${MAKE} -f Makefile.mingw32 clean
+	-cd ${DEPSDIR}/libal5poly && ${MAKE} clean
 	${MAKE} clean
 
 dirs: ${BINDIR} ${OBJDIR}
 
 game: libal5poly ${GAME}
 
-libal5poly: ${DEPSDIR}/libal5poly/bin/libal5poly.1.dll
+libal5poly: ${DEPSDIR}/libal5poly/lib/libal5poly.so
 
 run: game
-	${GAME}
+	LD_LIBRARY_PATH=deps/libal5poly/lib ${GAME}
 
 veryclean: clean
 	rm -fR ${DEPSDIR}/libal5poly
@@ -48,19 +48,16 @@ ${DEPSDIR}/libal5poly:
 	git clone git://github.com/bamccaig/libal5poly.git deps/libal5poly
 	cd $@ && git remote set-url --push origin git@github.com:bamccaig/libal5poly.git
 
-${DEPSDIR}/libal5poly/bin/libal5poly.1.dll: ${DEPSDIR}/libal5poly
-	cd $< && ${MAKE} -f Makefile.mingw32
+${DEPSDIR}/libal5poly/lib/libal5poly.so: ${DEPSDIR}/libal5poly
+	cd $< && ${MAKE}
 
 ${BINDIR}:
 	${MKDIR} $@
 
-${BINDIR}/libal5poly.1.dll:
-	ln -s ../deps/libal5poly/bin/libal5poly.1.dll $@
-
 ${OBJDIR}:
 	${MKDIR} $@
 
-${GAME}: ${OBJECTS} ${BINDIR} ${BINDIR}/libal5poly.1.dll
+${GAME}: ${OBJECTS} ${BINDIR}
 	${CXX} -o $@ ${OBJECTS} ${LIBS}
 
 ${OBJDIR}/H4xDummy.o: ${SRCDIR}/H4xDummy.cpp ${INCDIR}/H4xDummy.hpp ${OBJDIR}
