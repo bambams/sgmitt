@@ -18,7 +18,7 @@ OBJECTS = ${OBJDIR}/ground.o \
 		  ${OBJDIR}/main.o \
 		  ${OBJDIR}/sun.o
 
-.PHONY: all build-deps clean deepclean game libal5poly run
+.PHONY: all build-deps clean deepclean game libal5poly run veryclean
 
 all: game
 
@@ -41,6 +41,9 @@ libal5poly: ${DEPSDIR}/libal5poly/bin/libal5poly.1.dll
 
 run: game
 	${GAME}
+
+veryclean: clean
+	rm -fR ${DEPSDIR}/libal5poly
 
 ${DEPSDIR}/libal5poly:
 	git clone git://github.com/bamccaig/libal5poly.git deps/libal5poly
