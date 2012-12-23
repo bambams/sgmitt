@@ -19,7 +19,7 @@ to bed, but instead began hacking away at the code and couldn't walk away.
 I just didn't have the energy to do that all week.
 
 I knew I couldn't do a pretty job of the code if I wanted to finish (and
-thought I still didn't finish, at least I did some things). I basically
+though I still didn't finish, at least I did some things). I basically
 would hack away at the code in sgmitt, and once it was sort of working I'd
 move the more generalized concepts (pretty much verbatim) into libal5poly.
 Those need a lot of work still, and I'd prefer to wrap them in an
