@@ -1,0 +1,33 @@
+== Dependencies ==
+
+allegro5 - http://liballeg.org/, http://allegro.cc/
+boost - http://boost.org
+libal5poly - https://github.com/bamccaig/libal5poly/
+
+== Build Instructions ==
+
+Currently the game only really supports Windows, though there is also an
+alternative branch that sort of supports Linux with a different Makefile.
+You should be able to just type 'make' from a MinGW environment. The game
+expects Allegro and Boost to be installed in the toolchain environment,
+but libal5poly to be itself cloned into the deps/ subdirctory. If it's not
+there then the Makefile will attempt to clone it from GitHub
+automatically. This obviously won't work if you don't have Git. It's a
+hack, but it works relatively nicely for those that do have Git.
+
+It also spares you the trouble of building libal5poly in Windows since we
+do a recursive make to build it, targetting the h4x MinGW Makefile of the
+libal5poly project which I added explicitly for this Santahack.
+
+Some interesting targets for the sgmitt Makefile:
+
+all - Build libal5poly and sgmitt.
+clean - Clean sgmitt.
+deepclean - Clean sgmitt and libal5poly (i.e., force libal5poly to be
+            rebuilt; not a great way to do it, but it works).
+
+The game is output into the bin/ subdirectory. You should be able to
+pretty much run it from anywhere, since it attempts to use Allegro's path
+API to determine where its "assets" are. Currently the details are sort of
+hard-coded into libal5poly, but I'd like to abstract those away so it's
+more flexible. In any case,...

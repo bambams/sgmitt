@@ -1,0 +1,74 @@
+== Santa's Gotta Make It To Town v0.1 ==
+
+The game is incomplete. It's even far from complete. I'm still proud to
+have done what I did. I learned a little bit, made some progress, and
+formed some ideas for libal5poly.
+
+== What Happened? ==
+
+I never really finalized or formalized the design. I wasn't sure what to
+do so I just sort of began one day by drawing a reindeer sprite in MS
+Paint (yes, that is my own work B-). I didn't have the skill to animate it
+(I was lucky it came out as good as it did, even though I don't think that
+reindeer antlers are like that) so I left it as is. At least I had
+something to draw in the game and work with. It got me started. For the
+most part I just wasn't very dedicated or motivated, I guess. I had the
+whole week off, minus Monday, but only spent a few days on it. Some of my
+best work was done in early morning hours when I was supposed to have gone
+to bed, but instead began hacking away at the code and couldn't walk away.
+I just didn't have the energy to do that all week.
+
+I knew I couldn't do a pretty job of the code if I wanted to finish (and
+thought I still didn't finish, at least I did some things). I basically
+would hack away at the code in sgmitt, and once it was sort of working I'd
+move the more generalized concepts (pretty much verbatim) into libal5poly.
+Those need a lot of work still, and I'd prefer to wrap them in an
+interface. The interface might help me to come up with better APIs for
+them. In any case, libal5poly has grown slightly as a result.
+
+== What It Was Supposed To Be ==
+
+Since I didn't really come up with a design at first, I got the reindeer
+sprite on the screen first and then began to think of ideas for a game. I
+decided to aim for a "whimsical platformer", though I wasn't quite sure
+what that would entail. I guess I was just aiming for a platformer at all.
+Then the reindeer automatically made me think of the song, "Run, Run,
+Rudolph" and I began to structure an idea around that.
+
+The concept was that somehow Santa's sleigh had crashed, the reindeer were
+all dead, and it was up to some kind of misfit reindeer (i.e., NOT
+"Rudolph") to save Christmas by getting Santa to the last town of the
+night in time. It was going to have a timed element to it. I hadn't
+decided for sure yet whether or not Santa would be riding on the
+reindeer's back, or being pulled behind in a sleigh, etc. Artistically I
+didn't think I could pull any of it off (certainly not on a tight
+deadline), but I could certainly imagine both ways working.
+
+So it would basically be a timed platformer. Thinking about it now I'm
+reminded of "Super Mario World" for the SNES, with Mario riding on a
+Yoshi. I suppose it could be done similarly, except that it would be Santa
+on a reindeer, and instead of the player being Santa it would be the
+reindeer.
+
+I envisioned a bloody scene for the original crash. Reindeer just broken
+and bleeding, etc. It would not be a kid friendly game, albeit you could
+easily get rid of the dark humor if so desired.
+
+I also hadn't decided whether or not the reindeer would be able to fly. I
+have always been facinated with flying and always loved video games that
+let me explore the fantasy, but most of them limit your ability to fly and
+I guess that's probably done to give you a challenge. I thought perhaps
+the ability to fly would be limited by some kind of magical dust that
+Santa had a very short supply of left or something. Thinking more about it
+now, it might even be something that Santa (i.e., AI) controls instead of
+you, which may or may not create an interesting dynamic for the gameplay.
+
+== To Be Continued? ==
+
+As is typical with programmers, I guess, I'd like to continue on with this
+project and complete it someday. I think the concept is pretty good, even
+if it came about "automatically". I won't make any promises since we all
+know how that goes, but maybe I'd like to continue working on this, as
+well as libal5poly, and eventually get them into a completed state.
+Ideally also a clean code state, but I guess I should care more about the
+completed bit.
