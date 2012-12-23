@@ -1,5 +1,6 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
 #include <boost/algorithm/string/regex.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/regex.hpp>
@@ -19,18 +20,29 @@
 #include "al5poly/Player.hpp"
 #include "al5poly/Renderer.hpp"
 
+#include "ground.hpp"
 #include "JumpHandler.hpp"
 #include "RunHandler.hpp"
 #include "make_ptr.hpp"
 
+#define GROUND_COLOR (al_map_rgb(100, 255, 100))
+
+const char * const GROUND_BITMAP_NAME = "ground";
 const char * const PLAYER_BITMAP_NAME = "reindeer";
 const char * const PLAYER_SPRITE_PATH = "reindeer.png";
 const char * const PLAYER_ANIMATION_NAME = "default";
 
+const int GROUND_H = 5;
 const int H4X_GRAVITY_STEP = 10;
 const int H4X_JUMP_STEP = 40;
 const int PLAYER_START_X = 300;
-const int PLAYER_START_Y = 400;
+const int PLAYER_START_Y = 395;
+
+const int GROUND_START_X = -SCREEN_W / 2;
+const int GROUND_W = SCREEN_W * 2;
+const int GROUND_START_Y = SCREEN_H - GROUND_H;
+
+al5poly::ALLEGRO_BITMAP_Ptr createGroundSprite(void);
 
 al5poly::Player createPlayer(const al5poly::AssetManager &);
 
@@ -60,6 +72,7 @@ int main(int argc, char * argv[]) try
     al5poly::InputManager inputMan;
     al5poly::Renderer renderer(display);
 
+    assMan.addBitmap(GROUND_BITMAP_NAME, createGroundSprite());
     assMan.loadBitmap(PLAYER_BITMAP_NAME, PLAYER_SPRITE_PATH, true);
     assMan.loadAnimation(PLAYER_ANIMATION_NAME, 1, PLAYER_BITMAP_NAME);
 
@@ -69,6 +82,9 @@ int main(int argc, char * argv[]) try
             make_ptr<JumpHandler>(new JumpHandler(player)));
 
     RunHandler::Ptr runner(new RunHandler(player));
+
+    H4xGround ground(GROUND_START_X, GROUND_START_Y,
+            assMan.getBitmap(GROUND_BITMAP_NAME));
 
     inputMan.addActionHandler("run-left", runner);
     inputMan.addActionHandler("run-right", runner);
@@ -139,6 +155,7 @@ int main(int argc, char * argv[]) try
         {
             try
             {
+                renderer.render(*clock.getGameTime(), camera, ground);
                 renderer.render(*clock.getGameTime(), camera, player);
                 renderer.paint();
             }
@@ -156,6 +173,21 @@ catch(std::exception & ex)
     std::cerr << ex.what() << std::endl;
 
     return 1;
+}
+
+al5poly::ALLEGRO_BITMAP_Ptr createGroundSprite(void)
+{
+    ALLEGRO_BITMAP * sprite = al_create_bitmap(GROUND_W, GROUND_H);
+
+    if(sprite == 0)
+    {
+        throw std::runtime_error("Failed to create ground sprite.");
+    }
+
+    al_set_target_bitmap(sprite);
+    al_draw_filled_rectangle(0, 0, GROUND_W, GROUND_H, GROUND_COLOR);
+
+    return make_ptr(sprite, al_destroy_bitmap);
 }
 
 al5poly::Player createPlayer(const al5poly::AssetManager & assMan)
@@ -233,6 +265,9 @@ void initializeAllegro5(
 
     if(!al_init_image_addon())
         al5poly::Exception("Failed to initialize image addon.").raise();
+
+    if(!al_init_primitives_addon())
+        al5poly::Exception("Failed to initialize primitives addon.").raise();
 
     al5poly::ALLEGRO_TIMER_Ptr t(
             al_create_timer(1.0 / FPS),
