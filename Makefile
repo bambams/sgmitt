@@ -11,7 +11,7 @@ PREFIX =
 REMOVE = rm -fR
 SRCDIR = src
 
-GAME = ${BINDIR}/game.exe
+GAME = ${BINDIR}/sgmitt.exe
 OBJECTS = ${OBJDIR}/ground.o \
 		  ${OBJDIR}/JumpHandler.o \
 		  ${OBJDIR}/RunHandler.o \
