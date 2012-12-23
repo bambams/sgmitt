@@ -22,8 +22,8 @@
 
 #include "ground.hpp"
 #include "JumpHandler.hpp"
-#include "RunHandler.hpp"
 #include "make_ptr.hpp"
+#include "RunHandler.hpp"
 #include "sun.hpp"
 
 #define GROUND_COLOR (al_map_rgb(100, 255, 100))
