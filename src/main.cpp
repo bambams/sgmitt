@@ -37,6 +37,8 @@ const int H4X_GRAVITY_STEP = 10;
 const int H4X_JUMP_STEP = 40;
 const int PLAYER_START_X = 300;
 const int PLAYER_START_Y = 395;
+const int SCREEN_W = 800;
+const int SCREEN_H = 600;
 
 const int GROUND_START_X = -SCREEN_W / 2;
 const int GROUND_W = SCREEN_W * 2;
@@ -252,7 +254,7 @@ void initializeAllegro5(
     al_set_new_display_flags(ALLEGRO_WINDOWED);
 
     al5poly::ALLEGRO_DISPLAY_Ptr d(
-            al_create_display(800, 600),
+            al_create_display(SCREEN_W, SCREEN_H),
             al_destroy_display);
 
     if(!d)
