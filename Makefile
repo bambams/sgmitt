@@ -15,7 +15,8 @@ GAME = ${BINDIR}/game.exe
 OBJECTS = ${OBJDIR}/ground.o \
 		  ${OBJDIR}/JumpHandler.o \
 		  ${OBJDIR}/RunHandler.o \
-		  ${OBJDIR}/main.o
+		  ${OBJDIR}/main.o \
+		  ${OBJDIR}/sun.o
 
 .PHONY: all build-deps clean deepclean game libal5poly run
 
@@ -70,4 +71,7 @@ ${OBJDIR}/RunHandler.o: ${SRCDIR}/RunHandler.cpp ${INCDIR}/RunHandler.hpp ${OBJD
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/main.o: ${SRCDIR}/main.cpp ${OBJDIR}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+${OBJDIR}/sun.o: ${SRCDIR}/sun.cpp ${INCDIR}/sun.hpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
