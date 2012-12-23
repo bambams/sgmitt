@@ -25,7 +25,7 @@ RunHandler::RunHandler(
         const int screenHeight,
         al5poly::Camera & camera,
         al5poly::Player & player,
-        H4xGround & ground):
+        H4xDummy & ground):
     screenWidth_(screenWidth),
     screenHeight_(screenHeight),
     camera_(camera),

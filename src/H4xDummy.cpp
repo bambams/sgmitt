@@ -18,9 +18,9 @@
  * along with sgmitt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ground.hpp"
+#include "H4xDummy.hpp"
 
-H4xGround::H4xGround(
+H4xDummy::H4xDummy(
         int x,
         int y,
         const al5poly::ALLEGRO_BITMAP_Ptr sprite):
@@ -30,38 +30,38 @@ H4xGround::H4xGround(
 {
 }
 
-int H4xGround::getWidth(void) const
+int H4xDummy::getWidth(void) const
 {
     return al_get_bitmap_width(this->sprite_.get());
 }
 
-int H4xGround::getX(void) const
+int H4xDummy::getX(void) const
 {
     return this->x_;
 }
 
-int H4xGround::getY(void) const
+int H4xDummy::getY(void) const
 {
     return this->y_;
 }
 
-int H4xGround::setX(const int x)
+int H4xDummy::setX(const int x)
 {
     return this->x_ = x;
 }
 
-int H4xGround::setY(const int y)
+int H4xDummy::setY(const int y)
 {
     return this->y_ = y;
 }
 
-al5poly::IFrame::Ptr H4xGround::getCurrentFrame(
+al5poly::IFrame::Ptr H4xDummy::getCurrentFrame(
         const al5poly::IGameTime &) const
 {
     return make_ptr(new al5poly::Frame(this->sprite_));
 }
 
-al5poly::Orientation H4xGround::getOrientation(void) const
+al5poly::Orientation H4xDummy::getOrientation(void) const
 {
     return al5poly::AL5POLY_ORIENTATION_NONE;
 }

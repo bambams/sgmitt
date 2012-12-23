@@ -28,7 +28,7 @@
 
 class RunHandler;
 
-    #include "ground.hpp"
+    #include "H4xDummy.hpp"
 
 class RunHandler:
     public al5poly::IInputHandler
@@ -39,7 +39,7 @@ class RunHandler:
     al5poly::Camera & camera_;
     al5poly::Player & player_;
 
-    H4xGround & ground_;
+    H4xDummy & ground_;
 public:
     typedef boost::shared_ptr<RunHandler> Ptr;
 
@@ -48,7 +48,7 @@ public:
         const int,
         al5poly::Camera &,
         al5poly::Player &,
-        H4xGround &);
+        H4xDummy &);
 
     void operator()(
             const std::string &,

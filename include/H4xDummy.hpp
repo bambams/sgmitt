@@ -18,8 +18,8 @@
  * along with sgmitt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GROUND_HPP
-    #define GROUND_HPP
+#ifndef H4XDUMMY_HPP
+    #define H4XDUMMY_HPP
 
     #include <al5poly/altypedef.hpp>
     #include "al5poly/Frame.hpp"
@@ -28,18 +28,18 @@
     #include <al5poly/IRenderable.hpp>
     #include <al5poly/Orientation.hpp>
 
-class H4xGround;
+class H4xDummy;
 
     #include "make_ptr.hpp"
 
-class H4xGround:
+class H4xDummy:
     public al5poly::IRenderable
 {
     int x_;
     int y_;
     const al5poly::ALLEGRO_BITMAP_Ptr sprite_;
 public:
-    H4xGround(int, int, const al5poly::ALLEGRO_BITMAP_Ptr);
+    H4xDummy(int, int, const al5poly::ALLEGRO_BITMAP_Ptr);
 
     int getWidth(void) const;
     int getX(void) const;

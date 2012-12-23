@@ -12,11 +12,10 @@ REMOVE = rm -fR
 SRCDIR = src
 
 GAME = ${BINDIR}/sgmitt.exe
-OBJECTS = ${OBJDIR}/ground.o \
+OBJECTS = ${OBJDIR}/H4xDummy.o \
 		  ${OBJDIR}/JumpHandler.o \
 		  ${OBJDIR}/RunHandler.o \
-		  ${OBJDIR}/main.o \
-		  ${OBJDIR}/sun.o
+		  ${OBJDIR}/main.o
 
 .PHONY: all build-deps clean deepclean game libal5poly run veryclean
 
@@ -64,7 +63,7 @@ ${OBJDIR}:
 ${GAME}: ${OBJECTS} ${BINDIR} ${BINDIR}/libal5poly.1.dll
 	${CXX} -o $@ ${OBJECTS} ${LIBS}
 
-${OBJDIR}/ground.o: ${SRCDIR}/ground.cpp ${INCDIR}/ground.hpp ${OBJDIR}
+${OBJDIR}/H4xDummy.o: ${SRCDIR}/H4xDummy.cpp ${INCDIR}/H4xDummy.hpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/JumpHandler.o: ${SRCDIR}/JumpHandler.cpp ${INCDIR}/JumpHandler.hpp ${OBJDIR}
@@ -74,7 +73,4 @@ ${OBJDIR}/RunHandler.o: ${SRCDIR}/RunHandler.cpp ${INCDIR}/RunHandler.hpp ${OBJD
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/main.o: ${SRCDIR}/main.cpp ${OBJDIR}
-	${CXX} ${CXXFLAGS} -c -o $@ $<
-
-${OBJDIR}/sun.o: ${SRCDIR}/sun.cpp ${INCDIR}/sun.hpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<

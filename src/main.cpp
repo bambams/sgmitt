@@ -40,11 +40,10 @@
 #include "al5poly/Player.hpp"
 #include "al5poly/Renderer.hpp"
 
-#include "ground.hpp"
+#include "H4xDummy.hpp"
 #include "JumpHandler.hpp"
 #include "make_ptr.hpp"
 #include "RunHandler.hpp"
-#include "sun.hpp"
 
 #define GROUND_COLOR (al_map_rgb(225, 225, 225))
 #define SUN_COLOR (al_map_rgb(255, 255, 100))
@@ -113,9 +112,9 @@ int main(int argc, char * argv[]) try
     inputMan.addActionHandler("jump",
             make_ptr<JumpHandler>(new JumpHandler(player)));
 
-    H4xSun sun(SUN_X, SUN_Y, assMan.getBitmap(SUN_BITMAP_NAME));
+    H4xDummy sun(SUN_X, SUN_Y, assMan.getBitmap(SUN_BITMAP_NAME));
 
-    H4xGround ground(GROUND_START_X, GROUND_START_Y,
+    H4xDummy ground(GROUND_START_X, GROUND_START_Y,
             assMan.getBitmap(GROUND_BITMAP_NAME));
 
     RunHandler::Ptr runner(
