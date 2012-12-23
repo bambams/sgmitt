@@ -46,13 +46,13 @@
 #include "RunHandler.hpp"
 
 #define GROUND_COLOR (al_map_rgb(225, 225, 225))
-#define SUN_COLOR (al_map_rgb(255, 255, 100))
+#define MOON_COLOR (al_map_rgb(255, 255, 100))
 
 const char * const GROUND_BITMAP_NAME = "ground";
 const char * const PLAYER_BITMAP_NAME = "reindeer";
 const char * const PLAYER_SPRITE_PATH = "reindeer.png";
 const char * const PLAYER_ANIMATION_NAME = "default";
-const char * const SUN_BITMAP_NAME = "sun";
+const char * const MOON_BITMAP_NAME = "moon";
 
 const int GROUND_H = 5;
 const int H4X_GRAVITY_STEP = 10;
@@ -61,18 +61,18 @@ const int PLAYER_START_X = 300;
 const int PLAYER_START_Y = 395;
 const int SCREEN_W = 800;
 const int SCREEN_H = 600;
-const int SUN_W = 100;
-const int SUN_H = 100;
-const int SUN_Y = 100;
+const int MOON_W = 100;
+const int MOON_H = 100;
+const int MOON_Y = 100;
 
 const int GROUND_START_X = -SCREEN_W / 2;
 const int GROUND_W = SCREEN_W * 2;
 const int GROUND_START_Y = SCREEN_H - GROUND_H;
-const int SUN_RADIUS = SUN_W / 2;
-const int SUN_X = SCREEN_W - SUN_Y;
+const int MOON_RADIUS = MOON_W / 2;
+const int MOON_X = SCREEN_W - MOON_Y;
 
 al5poly::ALLEGRO_BITMAP_Ptr createGroundSprite(void);
-al5poly::ALLEGRO_BITMAP_Ptr createSunSprite(void);
+al5poly::ALLEGRO_BITMAP_Ptr createMoonSprite(void);
 
 al5poly::Player createPlayer(const al5poly::AssetManager &);
 
@@ -103,7 +103,7 @@ int main(int argc, char * argv[]) try
     al5poly::Renderer renderer(display);
 
     assMan.addBitmap(GROUND_BITMAP_NAME, createGroundSprite());
-    assMan.addBitmap(SUN_BITMAP_NAME, createSunSprite());
+    assMan.addBitmap(MOON_BITMAP_NAME, createMoonSprite());
     assMan.loadBitmap(PLAYER_BITMAP_NAME, PLAYER_SPRITE_PATH, true);
     assMan.loadAnimation(PLAYER_ANIMATION_NAME, 1, PLAYER_BITMAP_NAME);
 
@@ -112,7 +112,7 @@ int main(int argc, char * argv[]) try
     inputMan.addActionHandler("jump",
             make_ptr<JumpHandler>(new JumpHandler(player)));
 
-    H4xDummy sun(SUN_X, SUN_Y, assMan.getBitmap(SUN_BITMAP_NAME));
+    H4xDummy moon(MOON_X, MOON_Y, assMan.getBitmap(MOON_BITMAP_NAME));
 
     H4xDummy ground(GROUND_START_X, GROUND_START_Y,
             assMan.getBitmap(GROUND_BITMAP_NAME));
@@ -190,7 +190,7 @@ int main(int argc, char * argv[]) try
             try
             {
                 renderer.render(*clock.getGameTime(), camera, ground);
-                renderer.render(*clock.getGameTime(), camera, sun);
+                renderer.render(*clock.getGameTime(), camera, moon);
                 renderer.render(*clock.getGameTime(), camera, player);
                 renderer.paint();
             }
@@ -225,17 +225,18 @@ al5poly::ALLEGRO_BITMAP_Ptr createGroundSprite(void)
     return make_ptr(sprite, al_destroy_bitmap);
 }
 
-al5poly::ALLEGRO_BITMAP_Ptr createSunSprite(void)
+al5poly::ALLEGRO_BITMAP_Ptr createMoonSprite(void)
 {
-    ALLEGRO_BITMAP * sprite = al_create_bitmap(SUN_W, SUN_H);
+    ALLEGRO_BITMAP * sprite = al_create_bitmap(MOON_W, MOON_H);
 
     if(sprite == 0)
     {
-        throw std::runtime_error("Failed to create Sun sprite.");
+        throw std::runtime_error("Failed to create moon sprite.");
     }
 
     al_set_target_bitmap(sprite);
-    al_draw_filled_circle(SUN_W / 2, SUN_H / 2, SUN_RADIUS, SUN_COLOR);
+    al_draw_filled_circle( MOON_W / 2, MOON_H / 2, MOON_RADIUS,
+            MOON_COLOR);
 
     return make_ptr(sprite, al_destroy_bitmap);
 }
