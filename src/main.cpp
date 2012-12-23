@@ -235,6 +235,12 @@ void h4xGravity(al5poly::Player & player)
 {
     int y = player.getY();
 
+    // h4x.
+    if(y == PLAYER_START_Y)
+    {
+        return;
+    }
+
     if(y < PLAYER_START_Y)
     {
         y += H4X_GRAVITY_STEP;
