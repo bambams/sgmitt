@@ -93,11 +93,13 @@ int main(int argc, char * argv[]) try
     inputMan.addActionHandler("jump",
             make_ptr<JumpHandler>(new JumpHandler(player)));
 
-    RunHandler::Ptr runner(new RunHandler(player));
     H4xSun sun(SUN_X, SUN_Y, assMan.getBitmap(SUN_BITMAP_NAME));
 
     H4xGround ground(GROUND_START_X, GROUND_START_Y,
             assMan.getBitmap(GROUND_BITMAP_NAME));
+
+    RunHandler::Ptr runner(
+            new RunHandler(SCREEN_W, SCREEN_H, camera, player, ground));
 
     inputMan.addActionHandler("run-left", runner);
     inputMan.addActionHandler("run-right", runner);
