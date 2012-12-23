@@ -12,7 +12,8 @@ REMOVE = rm -fR
 SRCDIR = src
 
 GAME = ${BINDIR}/game.exe
-OBJECTS = ${OBJDIR}/JumpHandler.o \
+OBJECTS = ${OBJDIR}/ground.o \
+		  ${OBJDIR}/JumpHandler.o \
 		  ${OBJDIR}/RunHandler.o \
 		  ${OBJDIR}/main.o
 
@@ -58,6 +59,9 @@ ${OBJDIR}:
 
 ${GAME}: ${OBJECTS} ${BINDIR} ${BINDIR}/libal5poly.1.dll
 	${CXX} -o $@ ${OBJECTS} ${LIBS}
+
+${OBJDIR}/ground.o: ${SRCDIR}/ground.cpp ${INCDIR}/ground.hpp ${OBJDIR}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
 
 ${OBJDIR}/JumpHandler.o: ${SRCDIR}/JumpHandler.cpp ${INCDIR}/JumpHandler.hpp ${OBJDIR}
 	${CXX} ${CXXFLAGS} -c -o $@ $<
