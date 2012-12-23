@@ -246,6 +246,12 @@ void h4xGravity(al5poly::Player & player)
     }
 
     player.setY(y);
+
+    // h4x.
+    if(y == PLAYER_START_Y)
+    {
+        player.land();
+    }
 }
 
 void h4xJump(
