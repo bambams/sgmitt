@@ -26,7 +26,7 @@
 #include "RunHandler.hpp"
 #include "sun.hpp"
 
-#define GROUND_COLOR (al_map_rgb(100, 255, 100))
+#define GROUND_COLOR (al_map_rgb(225, 225, 225))
 #define SUN_COLOR (al_map_rgb(255, 255, 100))
 
 const char * const GROUND_BITMAP_NAME = "ground";
