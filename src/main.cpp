@@ -240,6 +240,7 @@ void h4xGravity(al5poly::Player & player)
         y += H4X_GRAVITY_STEP;
     }
 
+    // h4x.
     if(y > PLAYER_START_Y)
     {
         y = PLAYER_START_Y;
