@@ -22,7 +22,7 @@ OBJECTS = ${OBJDIR}/H4xDummy.o \
 all: game
 
 build-deps: ${DEPSDIR}/libal5poly
-	${REMOVE} ${DEPSDIR}/libal5poly/bin/libal5poly.1.dll
+	cd $< && ${MAKE} -f Makefile.mingw32 clean
 	cd $< && ${MAKE} -f Makefile.mingw32
 
 clean:
