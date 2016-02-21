@@ -1,10 +1,10 @@
 BINDIR = bin
 COPY = cp
 CXX = g++
-CXXFLAGS = -g3 -Iinclude -Ideps/libal5poly/include -Wall `pkg-config --cflags allegro-5.0 allegro_image-5.0 allegro_primitives-5.0`
+CXXFLAGS = -g3 -Iinclude -Ideps/libal5poly/include -Wall `pkg-config --cflags allegro-5 allegro_image-5 allegro_primitives-5`
 DEPSDIR = deps
 INCDIR = include
-LIBS = -Ldeps/libal5poly/lib/ -lal5poly `pkg-config --libs allegro-5.0 allegro_image-5.0 allegro_primitives-5.0`
+LIBS = -Ldeps/libal5poly/lib/ -lal5poly `pkg-config --libs allegro-5 allegro_image-5 allegro_primitives-5`
 MKDIR = mkdir -p
 OBJDIR = obj
 PREFIX =
